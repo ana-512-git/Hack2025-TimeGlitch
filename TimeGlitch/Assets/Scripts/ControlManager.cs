@@ -24,7 +24,7 @@ public class ControlManager : MonoBehaviour
         if(sceneLoaded) StartCoroutine(LoadSceneWithDelay(1.5f));
     }
 
-    IEnumerator LoadSceneWithDelay(float seconds)
+    public static IEnumerator LoadSceneWithDelay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene("SampleScene");
