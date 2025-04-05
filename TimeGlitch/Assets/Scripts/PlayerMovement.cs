@@ -3,67 +3,56 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
-    private bool idle = true, walk_back = false, walk_front = false, walk_left = false, walk_right = false;
-    private Animator animation;
+    private bool idle = true;
+    private bool[] walk = new bool[8];
+    private Animator anim;
 
     void Awake() {
-        animation = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+    }
+
+    private int getDirection(float horizontal, float vertical) {
+        if(horizontal < 0 && vertical > 0)  return 1;
+        if(horizontal == 0 && vertical > 0) return 2;
+        if(horizontal > 0 && vertical > 0)  return 3;
+        if(horizontal < 0 && vertical == 0) return 4;
+        if(horizontal > 0 && vertical == 0) return 5;
+        if(horizontal < 0 && vertical < 0)  return 6;
+        if(horizontal == 0 && vertical < 0) return 7;
+        if(horizontal > 0 && vertical < 0)  return 8;
+        return 0;
     }
 
     void Update() {
         float horizontal = Input.GetAxis("Horizontal"), vertical = Input.GetAxis("Vertical");
-        float moveX = horizontal * speed * Time.deltaTime;
-        float moveY = vertical * speed * Time.deltaTime;
-        transform.Translate(new Vector2(moveX, moveY));
+        transform.Translate(new Vector2(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime));
 
-        if(horizontal == 0 && vertical == 0 && !idle) {
-            animation.ResetTrigger("isWalkingBack");
-            animation.ResetTrigger("isWalkingFront");
-            animation.ResetTrigger("isWalkingLeft");
-            animation.ResetTrigger("isWalkingRight");
-            animation.SetTrigger("isIdle");
+        int direction = getDirection(horizontal, vertical);
+        if(direction == 0 && !idle) {
+            for(int i = 0; i < 8; i++) {
+                anim.ResetTrigger("isWalk" + (i + 1));
+                walk[i] = false;
+            }
+
+            anim.SetTrigger("isIdle");
             idle = true;
-            walk_back = walk_front = walk_left = walk_right = false;
-        }
-        
-        // walk up or down
-        if(vertical > 0 && !walk_back) {
-            animation.ResetTrigger("isWalkingFront");
-            animation.ResetTrigger("isIdle");
-            animation.ResetTrigger("isWalkingLeft");
-            animation.ResetTrigger("isWalkingRight");
-            animation.SetTrigger("isWalkingBack");
-            walk_back = true;
-            idle = walk_front = walk_left = walk_right = false;
-        }
-        else    if(vertical < 0 && !walk_front) {
-            animation.ResetTrigger("isWalkingBack");
-            animation.ResetTrigger("isIdle");
-            animation.ResetTrigger("isWalkingLeft");
-            animation.ResetTrigger("isWalkingRight");
-            animation.SetTrigger("isWalkingFront");
-            walk_front = true;
-            idle = walk_back = walk_left = walk_right = false;
+            return;
         }
 
-        // walk left or right
-        if(horizontal > 0 && !walk_right) {
-            animation.ResetTrigger("isIdle");
-            animation.ResetTrigger("isWalkingLeft");
-            animation.ResetTrigger("isWalkingFront");
-            animation.ResetTrigger("isWalkingBack");
-            animation.SetTrigger("isWalkingRight");
-            walk_right = true;
-            idle = walk_back = walk_left = walk_front = false;
-        }
-        else    if(horizontal < 0 && !walk_left) {
-            animation.ResetTrigger("isIdle");
-            animation.ResetTrigger("isWalkingRight");
-            animation.ResetTrigger("isWalkingFront");
-            animation.ResetTrigger("isWalkingBack");
-            animation.SetTrigger("isWalkingLeft");
-            walk_left = true;
-            idle = walk_back = walk_right = walk_front = false;
+        if(direction == 0)  return;
+
+         if(!walk[direction - 1]) {
+            for(int i = 0; i < 8; i++) {
+                if(i != direction - 1) {
+                    anim.ResetTrigger("isWalk" + (i + 1));
+                    walk[i] = false;
+                }
+            }
+
+            anim.ResetTrigger("isIdle");
+            anim.SetTrigger("isWalk" + direction);
+            walk[direction - 1] = true;
+            idle = false;
         }
     }
 }
