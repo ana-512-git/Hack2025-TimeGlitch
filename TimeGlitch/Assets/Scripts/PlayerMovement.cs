@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(direction == 0)  return;
 
-         if(!walk[direction - 1]) {
+        if(!walk[direction - 1]) {
             for(int i = 0; i < 8; i++) {
                 if(i != direction - 1) {
                     anim.ResetTrigger("isWalk" + (i + 1));
