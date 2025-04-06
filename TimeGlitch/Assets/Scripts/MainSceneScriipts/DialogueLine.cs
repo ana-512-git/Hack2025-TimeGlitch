@@ -11,6 +11,13 @@ public class DialogueLine : MonoBehaviour
 
     private int index;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         // Disable on start (NPC will enable it)
@@ -26,11 +33,14 @@ public class DialogueLine : MonoBehaviour
 
     IEnumerator TypeLine()
     {
+        
+        audioManager.PlaySFX(audioManager.dialog);
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+        audioManager.StopSFX(audioManager.dialog);
     }
 
     void NextLine()
@@ -57,6 +67,7 @@ public class DialogueLine : MonoBehaviour
             }
             else
             {
+                audioManager.StopSFX(audioManager.dialog);
                 StopAllCoroutines();
                 textComponent.text = lines[index];
             }
