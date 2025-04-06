@@ -62,4 +62,16 @@ public class DialogueLine : MonoBehaviour
             }
         }
     }
+
+    public GameObject player; // Drag player in Inspector
+
+    void OnEnable()
+    {
+        player.GetComponent<PlayerMovement>().enabled = false;
+    }
+
+    void OnDisable()
+    {
+        player.GetComponent<PlayerMovement>().enabled = true;
+    }
 }

@@ -4,5 +4,18 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 86e89bd9e4a9c5245a015cf17e3c0aae
+  - enabled: 1
+    path: Assets/Scenes/Picture_puzzle.unity
+    guid: 18d6ec11842b2904cbaf071d0dcb701d
+  - enabled: 1
+    path: Assets/Scenes/PuzzleScene.unity
+    guid: 1ed08e7504beb2b4ab2eafd02df00f13
+  - enabled: 1
+    path: Assets/Scenes/WireTask.unity
+    guid: b28af6c3473ba80459d1329666a0818d
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class PuzzleSolve : MonoBehaviour
@@ -17,7 +18,7 @@ public class PuzzleSolve : MonoBehaviour
 
         if(userInput.All(char.IsLetter))
             if(userInput.ToLower() == "time") {
-                StartCoroutine(ControlManager.LoadSceneWithDelay(1.5f));
+                SceneManager.LoadScene("MainScene");
                 return;
             }
 

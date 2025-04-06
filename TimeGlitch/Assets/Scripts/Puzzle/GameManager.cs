@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
   [Header("Game Elements")]
@@ -200,7 +201,7 @@ public class GameManager : MonoBehaviour {
       // Increase the number of correct pieces, and check for puzzle completion.
       piecesCorrect++;
       if (piecesCorrect == pieces.Count) {
-        //EXIT SCENE
+        SceneManager.LoadScene("MainScene");
       }
     }
   }

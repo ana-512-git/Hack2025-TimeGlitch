@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private bool idle = true;
     private bool[] walk = new bool[8];
     private Animator anim;
+    public bool canMove = true;
 
     void Awake() {
         anim = GetComponent<Animator>();
@@ -24,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
+        if (!canMove) return;
+        
         float horizontal = Input.GetAxis("Horizontal"), vertical = Input.GetAxis("Vertical");
         transform.Translate(new Vector2(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime));
 
