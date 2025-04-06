@@ -17,5 +17,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WireTask.unity
     guid: b28af6c3473ba80459d1329666a0818d
+  - enabled: 1
+    path: Assets/Scenes/MainScene_Portal.unity
+    guid: e2d7b129af497371bb64ddaa78831929
+  - enabled: 1
+    path: Assets/Scenes/MainScene_Vase.unity
+    guid: 53a8a6ebd6c9daf5c8b87caf616c8b11
+  - enabled: 1
+    path: Assets/Scenes/MainScene_Coffin.unity
+    guid: 555575ad54413cf8ab09fab5d982bdd9
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: d1ac89dda134a68c6b05f01a443264e0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

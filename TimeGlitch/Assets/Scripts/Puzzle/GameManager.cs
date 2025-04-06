@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour {
       // Increase the number of correct pieces, and check for puzzle completion.
       piecesCorrect++;
       if (piecesCorrect == pieces.Count) {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainScene_Vase");
       }
     }
   }

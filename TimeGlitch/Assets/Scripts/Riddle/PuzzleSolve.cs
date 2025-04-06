@@ -18,7 +18,7 @@ public class PuzzleSolve : MonoBehaviour
 
         if(userInput.All(char.IsLetter))
             if(userInput.ToLower() == "time") {
-                SceneManager.LoadScene("MainScene");
+                SceneManager.LoadScene("MainScene_Coffin");
                 return;
             }
 
